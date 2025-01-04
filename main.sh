@@ -111,6 +111,19 @@ $(cat "$LOG_FILE")
             "$summary"
     fi
 
+    # 准备飞书通知内容
+    feishu_title="GitHub 同步$([ $mirror_exit_code -eq 0 ] && echo "成功" || echo "失败")"
+    feishu_content="GitHub to Gitea 同步报告\n\n$(tail -n 50 "$LOG_FILE")"
+    
+    # 如果启用了飞书通知，调用 feishu_notify.sh
+    if [ "$ENABLE_FEISHU" = "true" ]; then
+        bash "$SCRIPT_DIR/feishu_notify.sh" \
+            "$FEISHU_WEBHOOK_URL" \
+            "$feishu_title" \
+            "$feishu_content"
+    fi
+
+
     # 清理工作目录
     [ -d "$WORK_DIR" ] && rm -rf "$WORK_DIR"
 

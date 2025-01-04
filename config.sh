@@ -22,6 +22,10 @@ SMTP_PASS=${SMTP_PASS:-""}
 MAIL_TO=${MAIL_TO:-""}
 MAIL_FROM=${MAIL_FROM:-"$SMTP_USER"}
 
+# 飞书通知配置
+ENABLE_FEISHU=${ENABLE_FEISHU:-"false"}
+FEISHU_WEBHOOK_URL=${FEISHU_WEBHOOK_URL:-""}
+
 # 跳过的仓库
 SKIP_REPOS=${SKIP_REPOS:-"archive,AutoApiSecret, \
                   backup-openbilibili-go-common, \
